@@ -33,7 +33,7 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 0 72% 51%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -43,12 +43,13 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
+    scroll-behavior: smooth;
   }
 }
 
 @layer components {
   .hero-section {
-    @apply relative bg-gradient-to-b from-red-50 to-white py-16;
+    @apply relative bg-gradient-to-b from-red-50 via-pink-50 to-white py-20;
   }
 
   .hero-section::before {
@@ -60,7 +61,7 @@
   }
   
   .glass-card {
-    @apply bg-white bg-opacity-80 backdrop-blur-sm border border-gray-100 shadow-lg rounded-xl;
+    @apply bg-white/80 backdrop-blur-sm border border-gray-100 shadow-lg rounded-xl transition-all duration-300 hover:shadow-xl;
   }
   
   .form-input {
@@ -75,5 +76,30 @@
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
+  }
+
+  .gradient-bg-1 {
+    @apply bg-gradient-to-br from-red-50 via-pink-50 to-white;
+  }
+  
+  .gradient-bg-2 {
+    @apply bg-gradient-to-r from-red-50 to-blue-50;
+  }
+  
+  .card-hover {
+    @apply transition-transform duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .section-title {
+    @apply text-3xl font-bold text-gray-900 mb-6 relative inline-block;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply block absolute w-1/2 h-1 bg-primary rounded-full bottom-0 left-0 -mb-2;
+  }
+
+  .tag {
+    @apply px-3 py-1 bg-primary/10 text-primary rounded-full text-xs font-medium;
   }
 }

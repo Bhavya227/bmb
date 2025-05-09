@@ -1,11 +1,12 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Droplets } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
 
   const navItems = [
@@ -20,8 +21,27 @@ const Navbar = () => {
     return location.pathname === path;
   };
 
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <nav 
+      className={`sticky top-0 z-50 transition-all duration-200 ${
+        isScrolled 
+          ? "bg-white/90 backdrop-blur-md shadow-md" 
+          : "bg-white border-b border-gray-200"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -29,7 +49,7 @@ const Navbar = () => {
               <Droplets className="h-8 w-8 text-primary" />
               <span className="ml-2 text-xl font-bold text-gray-900">BloodBank</span>
             </Link>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+            <div className="hidden sm:ml-8 sm:flex sm:space-x-8">
               {navItems.map((item) => (
                 <Link
                   key={item.title}
@@ -37,7 +57,7 @@ const Navbar = () => {
                   className={`inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium h-full
                     ${
                       isActive(item.path)
-                        ? "border-primary text-gray-900"
+                        ? "border-primary text-primary font-semibold"
                         : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     }`}
                 >
@@ -47,7 +67,7 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Button asChild>
+            <Button asChild className="font-medium bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary">
               <Link to="/register">Donate Now</Link>
             </Button>
           </div>
@@ -66,7 +86,7 @@ const Navbar = () => {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="sm:hidden">
+        <div className="sm:hidden absolute w-full bg-white shadow-lg border-t border-gray-100">
           <div className="pt-2 pb-3 space-y-1">
             {navItems.map((item) => (
               <Link
@@ -84,9 +104,9 @@ const Navbar = () => {
             ))}
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">
-            <div className="mt-3 space-y-1">
-              <Button asChild className="w-full rounded-none">
-                <Link to="/register">Donate Now</Link>
+            <div className="mt-3 space-y-1 px-3 pb-3">
+              <Button asChild className="w-full">
+                <Link to="/register" onClick={() => setIsMenuOpen(false)}>Donate Now</Link>
               </Button>
             </div>
           </div>

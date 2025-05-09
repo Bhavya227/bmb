@@ -1,7 +1,8 @@
 
 import { Link } from "react-router-dom";
-import { Heart, Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Heart, Facebook, Instagram, Twitter, Mail, Phone, MapPin, ArrowRight, Globe, Clock, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -23,6 +24,24 @@ const Footer = () => {
                 creating a community of life-savers. Every donation counts and 
                 can save up to three lives.
               </p>
+              <div className="flex flex-col gap-4 mb-8">
+                <div className="flex items-center">
+                  <Clock className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-white font-medium">Operating Hours</p>
+                    <p className="text-gray-400 text-sm">Monday - Friday: 9AM - 6PM</p>
+                    <p className="text-gray-400 text-sm">Weekend: 10AM - 4PM</p>
+                  </div>
+                </div>
+                <div className="flex items-center">
+                  <Users className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <div>
+                    <p className="text-white font-medium">Donation Statistics</p>
+                    <p className="text-gray-400 text-sm">5,000+ Regular Donors</p>
+                    <p className="text-gray-400 text-sm">10,000+ Lives Saved</p>
+                  </div>
+                </div>
+              </div>
               <div className="flex space-x-5 mb-8">
                 <a
                   href="#"
@@ -104,6 +123,37 @@ const Footer = () => {
                   </Link>
                 </li>
               </ul>
+
+              <h4 className="text-lg font-bold mb-6 mt-8 pb-1 border-b border-gray-800">Resources</h4>
+              <ul className="space-y-3">
+                <li>
+                  <a 
+                    href="#" 
+                    className="text-gray-400 hover:text-white flex items-center transition-colors"
+                  >
+                    <ArrowRight className="h-3.5 w-3.5 mr-2" />
+                    <span>Blood Donation FAQ</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="text-gray-400 hover:text-white flex items-center transition-colors"
+                  >
+                    <ArrowRight className="h-3.5 w-3.5 mr-2" />
+                    <span>Donation Process</span>
+                  </a>
+                </li>
+                <li>
+                  <a 
+                    href="#" 
+                    className="text-gray-400 hover:text-white flex items-center transition-colors"
+                  >
+                    <ArrowRight className="h-3.5 w-3.5 mr-2" />
+                    <span>Privacy Policy</span>
+                  </a>
+                </li>
+              </ul>
             </div>
             
             {/* Contact Info */}
@@ -126,7 +176,23 @@ const Footer = () => {
                     info@bloodbank.com
                   </a>
                 </li>
+                <li className="flex items-center">
+                  <Globe className="h-5 w-5 text-primary mr-3 flex-shrink-0" />
+                  <a href="https://www.bloodbank.com" className="text-gray-400 hover:text-white transition-colors">
+                    www.bloodbank.com
+                  </a>
+                </li>
               </ul>
+
+              <h4 className="text-lg font-bold mb-4 mt-8 pb-1 border-b border-gray-800">Newsletter</h4>
+              <p className="text-gray-400 text-sm mb-3">Stay updated with our latest news and events</p>
+              <div className="flex space-x-2">
+                <Input 
+                  placeholder="Your email" 
+                  className="bg-gray-800 border-gray-700 placeholder:text-gray-500 text-sm" 
+                />
+                <Button size="sm">Subscribe</Button>
+              </div>
             </div>
           </div>
         </div>
