@@ -11,6 +11,7 @@ import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
 import Donors from "./pages/Donors";
 import Register from "./pages/Register";
+import TechStack from "./pages/TechStack";
 import NotFound from "./pages/NotFound";
 
 // Create QueryClient instance inside the component
@@ -30,6 +31,7 @@ const App = () => {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/donors" element={<Donors />} />
                   <Route path="/register" element={<Register />} />
+                  <Route path="/tech-stack" element={<TechStack />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>

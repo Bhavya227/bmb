@@ -12,6 +12,7 @@ const Navbar = () => {
     { title: "Home", path: "/" },
     { title: "Dashboard", path: "/dashboard" },
     { title: "Donors", path: "/donors" },
+    { title: "Tech Stack", path: "/tech-stack" },
     { title: "Register", path: "/register" },
   ];
 
@@ -46,7 +47,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            <Button>Donate Now</Button>
+            <Button asChild>
+              <Link to="/register">Donate Now</Link>
+            </Button>
           </div>
           <div className="-mr-2 flex items-center sm:hidden">
             <button
@@ -82,7 +85,9 @@ const Navbar = () => {
           </div>
           <div className="pt-4 pb-3 border-t border-gray-200">
             <div className="mt-3 space-y-1">
-              <Button className="w-full rounded-none">Donate Now</Button>
+              <Button asChild className="w-full rounded-none">
+                <Link to="/register">Donate Now</Link>
+              </Button>
             </div>
           </div>
         </div>
