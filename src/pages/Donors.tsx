@@ -1,12 +1,20 @@
 
-import { useState } from "react";
-import { donors } from "@/utils/data";
+import { useState, useEffect } from "react";
 import DonorSearch from "@/components/donor/DonorSearch";
 import DonorList from "@/components/donor/DonorList";
 import { Donor } from "@/utils/types";
+import { getDonors } from "@/utils/localStorage";
 
 const Donors = () => {
-  const [filteredDonors, setFilteredDonors] = useState<Donor[]>(donors);
+  const [donors, setDonors] = useState<Donor[]>([]);
+  const [filteredDonors, setFilteredDonors] = useState<Donor[]>([]);
+  
+  // Load donors from local storage on component mount
+  useEffect(() => {
+    const storedDonors = getDonors();
+    setDonors(storedDonors);
+    setFilteredDonors(storedDonors);
+  }, []);
   
   const handleSearch = (results: Donor[]) => {
     setFilteredDonors(results);
@@ -19,7 +27,7 @@ const Donors = () => {
         <p className="text-gray-500">Search and manage blood donor information</p>
       </div>
       
-      <DonorSearch onSearch={handleSearch} />
+      <DonorSearch onSearch={handleSearch} donors={donors} />
       
       <DonorList donors={filteredDonors} />
     </div>

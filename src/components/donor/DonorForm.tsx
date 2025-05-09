@@ -1,12 +1,14 @@
-
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
-import { BloodType } from "@/utils/types";
-import { donors } from "@/utils/data";
+import { BloodType, Donor } from "@/utils/types";
+import { addDonor } from "@/utils/localStorage";
+import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 
 const DonorForm = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,8 +45,28 @@ const DonorForm = () => {
       return;
     }
     
-    // Form would be submitted to API here
-    // For demo, we'll just show a success message
+    // Create a new donor object
+    const newDonor: Donor = {
+      id: uuidv4(),
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      bloodType: formData.bloodType as BloodType,
+      gender: formData.gender as "Male" | "Female" | "Other",
+      age: Number(formData.age),
+      weight: Number(formData.weight),
+      lastDonation: null,
+      address: formData.address,
+      city: formData.city,
+      state: formData.state,
+      zipCode: formData.zipCode,
+      medicalConditions: formData.medicalConditions ? formData.medicalConditions.split(',').map(item => item.trim()) : [],
+      eligibleToDonate: true
+    };
+    
+    // Add donor to localStorage
+    addDonor(newDonor);
+    
     toast({
       title: "Success!",
       description: "Donor registration successful. Thank you for registering!",
@@ -65,6 +87,9 @@ const DonorForm = () => {
       zipCode: "",
       medicalConditions: ""
     });
+    
+    // Navigate to donors page to see the updated list
+    navigate("/donors");
   };
 
   return (

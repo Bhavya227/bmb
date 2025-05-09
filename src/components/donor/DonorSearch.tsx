@@ -3,13 +3,13 @@ import { useState } from "react";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BloodType, Donor } from "@/utils/types";
-import { donors } from "@/utils/data";
 
 interface DonorSearchProps {
   onSearch: (results: Donor[]) => void;
+  donors: Donor[];
 }
 
-const DonorSearch = ({ onSearch }: DonorSearchProps) => {
+const DonorSearch = ({ onSearch, donors }: DonorSearchProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [bloodTypeFilter, setBloodTypeFilter] = useState<BloodType | "">("");
   
